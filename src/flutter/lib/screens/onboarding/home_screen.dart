@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../test/test_intro_screen.dart';
+import '../test/adhd_test_screen.dart';
 
 /// 앱의 첫 화면 - 홈/온보딩 화면
 class HomeScreen extends StatefulWidget {
@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           PageRouteBuilder(
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
-                                    const TestIntroScreen(),
+                                    const AdhdTestScreen(),
                             transitionsBuilder:
                                 (
                                   context,

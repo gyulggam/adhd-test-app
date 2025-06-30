@@ -3,6 +3,7 @@ import '../../core/services/test_service.dart';
 import '../../models/question.dart';
 import '../../models/test_answer.dart';
 import '../../models/test_result.dart';
+import '../result/test_result_screen.dart';
 
 /// 실제 사용자용 ADHD 테스트 화면
 class AdhdTestScreen extends StatefulWidget {
@@ -386,51 +387,6 @@ class _AdhdTestScreenState extends State<AdhdTestScreen>
             if (isSelected)
               const Icon(Icons.check_circle, color: Colors.white, size: 24),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-/// 임시 결과 화면 (나중에 별도 파일로 분리)
-class TestResultScreen extends StatelessWidget {
-  final TestResult result;
-
-  const TestResultScreen({super.key, required this.result});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F2E8),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '테스트 완료! 🎉',
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                '총점: ${result.totalScore}점',
-                style: const TextStyle(fontSize: 18),
-              ),
-              Text(
-                '위험도: ${result.riskLevel.displayName}',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('처음으로'),
-              ),
-            ],
-          ),
         ),
       ),
     );

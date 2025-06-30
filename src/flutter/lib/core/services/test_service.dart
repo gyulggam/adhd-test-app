@@ -103,36 +103,54 @@ class TestService {
     }
   }
 
-  /// 점수와 고위험 문항 개수를 바탕으로 위험도 결정
+  /// 점수와 고위험 문항 개수를 바탕으로 위험도 결정 (5단계)
   Map<String, dynamic> _determineRiskLevel(
     int totalScore,
     int highWeightCount,
   ) {
     final criteria = _testData!['result_criteria'];
 
-    // 고위험 (4개 이상 고위험 문항 + 총점 40 이상)
-    if (highWeightCount >= 4 && totalScore >= 40) {
+    // 5단계: 위험 (44-54점 또는 고위험 문항 6개 이상)
+    if (totalScore >= 44 || highWeightCount >= 6) {
       return {
-        'riskLevel': TestRiskLevel.high,
-        'description': criteria['high_risk']['description'],
-        'advice': criteria['high_risk']['advice'],
+        'riskLevel': TestRiskLevel.danger,
+        'description': criteria['high_risk']['description'] ?? '',
+        'advice': criteria['high_risk']['advice'] ?? '',
       };
     }
 
-    // 중위험 (4개 고위험 문항 + 총점 25-39)
-    if (highWeightCount == 4 && totalScore >= 25 && totalScore <= 39) {
+    // 4단계: 주의 (33-43점 또는 고위험 문항 4-5개)
+    if (totalScore >= 33 || highWeightCount >= 4) {
       return {
-        'riskLevel': TestRiskLevel.medium,
-        'description': criteria['medium_risk']['description'],
-        'advice': criteria['medium_risk']['advice'],
+        'riskLevel': TestRiskLevel.attention,
+        'description': criteria['medium_risk']['description'] ?? '',
+        'advice': criteria['medium_risk']['advice'] ?? '',
       };
     }
 
-    // 저위험 (나머지)
+    // 3단계: 보통 (22-32점 또는 고위험 문항 2-3개)
+    if (totalScore >= 22 || highWeightCount >= 2) {
+      return {
+        'riskLevel': TestRiskLevel.moderate,
+        'description': '일상생활에서 가끔 집중력이나 활동성 관련 어려움을 경험할 수 있습니다.',
+        'advice': '생활 패턴을 점검하고 필요시 전문가와 상담받아보세요.',
+      };
+    }
+
+    // 2단계: 안전 (11-21점)
+    if (totalScore >= 11) {
+      return {
+        'riskLevel': TestRiskLevel.safe,
+        'description': '대체로 안정적인 집중력과 활동성을 보이고 있습니다.',
+        'advice': '현재 상태를 유지하며 건강한 생활 습관을 지켜나가세요.',
+      };
+    }
+
+    // 1단계: 매우 안전 (0-10점)
     return {
-      'riskLevel': TestRiskLevel.low,
-      'description': criteria['low_risk']['description'],
-      'advice': criteria['low_risk']['advice'],
+      'riskLevel': TestRiskLevel.verySafe,
+      'description': criteria['low_risk']['description'] ?? '',
+      'advice': criteria['low_risk']['advice'] ?? '',
     };
   }
 

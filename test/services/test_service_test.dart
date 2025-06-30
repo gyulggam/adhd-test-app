@@ -67,7 +67,7 @@ void main() {
         final result = await testService.calculateResult(answers);
 
         // Then: 저위험으로 판정되어야 함
-        expect(result.riskLevel, TestRiskLevel.low);
+        expect(result.riskLevel, TestRiskLevel.verySafe);
         expect(result.answers.length, 18);
         expect(result.totalScore, lessThan(25));
         expect(result.highWeightCount, lessThan(4));
@@ -82,7 +82,7 @@ void main() {
         final result = await testService.calculateResult(answers);
 
         // Then: 고위험으로 판정되어야 함
-        expect(result.riskLevel, TestRiskLevel.high);
+        expect(result.riskLevel, TestRiskLevel.danger);
         expect(result.answers.length, 18);
         expect(result.totalScore, greaterThanOrEqualTo(40));
         expect(result.highWeightCount, greaterThanOrEqualTo(4));
