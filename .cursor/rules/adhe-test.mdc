@@ -1,0 +1,248 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 🎯 "어? hoxy ADHD인가?" 개발 Rules
+
+## 📋 개발할 때 꼭 지켜야 할 규칙들
+
+### 🚀 Phase별 개발 진행 Rules
+
+#### 📌 Rule #1: 한 번에 하나씩, 확실하게!
+- 한 Phase가 100% 완료되어야만 다음 단계로 진행
+- 각 기능은 완전히 동작할 때까지 다른 기능 시작 금지
+- "일단 돌아가게 만들고 나중에 고치자" ❌
+
+#### 📌 Rule #2: 매일 실행 가능한 상태 유지
+```bash
+# 매일 개발 끝날 때 반드시 확인
+flutter run
+# 에러 없이 앱이 켜져야 함!
+```
+
+#### 📌 Rule #3: Phase별 완료 기준 체크
+
+**Phase 1 완료 기준 (프로젝트 설정)**
+- [ ] `flutter doctor` 모든 항목 ✅
+- [ ] 기본 화면이 에러 없이 표시됨
+- [ ] 폴더 구조가 DEVELOPMENT_GUIDE.md와 일치
+- [ ] pubspec.yaml의 모든 패키지 설치 완료
+
+**Phase 2 완료 기준 (핵심 기능)**
+- [ ] 18개 테스트 문항이 JSON에서 정상 로드
+- [ ] 점수 계산이 ADHD_TEST_DATA.md와 일치
+- [ ] 기본 화면 간 이동이 정상 작동
+- [ ] 테스트 데이터가 로컬에 저장됨
+
+**Phase 3 완료 기준 (UI/UX)**
+- [ ] 모든 화면이 다양한 화면 크기에서 정상 표시
+- [ ] 버튼 클릭, 스크롤 등 모든 인터랙션 정상
+- [ ] 로딩 상태 및 에러 상태 UI 구현
+- [ ] 접근성 기본 요구사항 충족
+
+---
+
+### 💻 코딩 Rules
+
+#### 📌 Rule #4: 파일 생성 규칙
+```bash
+# 새 파일 만들 때 반드시 이 순서로!
+1. 먼저 models/ 에서 데이터 구조 정의
+2. 그 다음 services/ 에서 비즈니스 로직
+3. 마지막에 screens/ 에서 UI 구현
+```
+
+#### 📌 Rule #5: 코드 작성 시 필수 요소
+```dart
+// 모든 클래스에 반드시 포함할 것들
+class MyWidget extends StatelessWidget {
+  /// 이 위젯이 뭘 하는지 한 줄 설명 (필수!)
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: 구현할 내용 (임시로라도 써놓기)
+    return Container(); // 빈 컨테이너라도 에러 안 나게!
+  }
+}
+```
+
+#### 📌 Rule #6: 변수명 및 파일명 규칙
+```dart
+// ✅ 좋은 예시
+final adhd_test_result = TestResult();
+class TestService {}
+File: test_service.dart
+
+// ❌ 나쁜 예시  
+final result = Result();
+class Service {}
+File: Service.dart
+```
+
+#### 📌 Rule #7: 에러 처리 필수
+```dart
+// 모든 함수에서 try-catch 필수!
+Future<TestResult> calculateResult() async {
+  try {
+    // 실제 로직
+    return result;
+  } catch (e) {
+    print('Error in calculateResult: $e'); // 디버깅용
+    return TestResult.empty(); // 기본값 반환
+  }
+}
+```
+
+---
+
+### 🧪 테스트 Rules
+
+#### 📌 Rule #8: 개발과 동시에 테스트 작성
+```bash
+# 새 기능 만들 때마다
+1. lib/services/test_service.dart 작성
+2. test/services/test_service_test.dart 바로 작성
+3. flutter test 실행해서 통과 확인
+```
+
+#### 📌 Rule #9: 핵심 기능 테스트 필수 항목
+- [ ] 점수 계산 로직 (가장 중요!)
+- [ ] JSON 데이터 로딩
+- [ ] 로컬 데이터 저장/불러오기
+- [ ] 화면 간 이동
+
+#### 📌 Rule #10: 테스트 실패 시 개발 중단
+```bash
+flutter test
+# 모든 테스트가 PASSED 되어야만 계속 개발!
+```
+
+---
+
+### 📱 UI 개발 Rules
+
+#### 📌 Rule #11: 화면별 개발 순서
+```
+1. onboarding/ (가장 간단)
+   → 2. test/ (핵심 기능)
+   → 3. result/ (복잡한 계산)
+   → 4. info/ (정보 표시)
+```
+
+#### 📌 Rule #12: 반응형 UI 필수 확인
+```bash
+# 매번 이 기기들에서 확인하기
+- Android 에뮬레이터 (다양한 크기)
+- iOS 시뮬레이터 (다양한 크기)
+- 실제 폰 (가능하다면)
+```
+
+#### 📌 Rule #13: UI 위젯 재사용 원칙
+```dart
+// 같은 UI가 2번 이상 나오면 반드시 공통 위젯으로 만들기
+// widgets/common/ 폴더에 저장
+class CustomButton extends StatelessWidget {
+  // 재사용 가능하게 만들기
+}
+```
+
+---
+
+### 🚨 문제 해결 Rules
+
+#### 📌 Rule #14: 에러 발생 시 대응 순서
+```bash
+1. 에러 메시지 정확히 읽기
+2. flutter clean && flutter pub get
+3. flutter doctor 다시 확인
+4. 구글링: "flutter [에러메시지]"
+5. 그래도 안 되면 이전 커밋으로 되돌리기
+```
+
+#### 📌 Rule #15: 막혔을 때 해결 방법
+```bash
+# 30분 이상 막혔을 때
+1. 문제를 글로 정확히 써보기
+2. 다른 방법으로 우회해서 일단 동작하게 만들기
+3. TODO 주석으로 나중에 개선할 부분 표시
+4. 완전히 막혔으면 하루 쉬고 다음날 다시 시도
+```
+
+---
+
+### 🔄 Git & 버전 관리 Rules
+
+#### 📌 Rule #16: 커밋 규칙
+```bash
+# 커밋 메시지 형식
+git commit -m "feat: 테스트 문항 로딩 기능 구현"
+git commit -m "fix: 점수 계산 오류 수정" 
+git commit -m "ui: 결과 화면 디자인 완료"
+
+# 커밋 전 반드시 확인
+flutter test  # 테스트 통과
+flutter run   # 앱 실행 확인
+```
+
+#### 📌 Rule #17: 백업 규칙
+```bash
+# 매일 개발 끝날 때
+git add .
+git commit -m "daily: [날짜] 개발 진행 상황"
+git push origin main
+
+# 중요한 기능 완성 시
+git tag v0.1.0-feature-name
+git push origin --tags
+```
+
+---
+
+### 📊 진행 상황 체크 Rules
+
+#### 📌 Rule #18: 매일 체크리스트
+- [ ] 오늘 목표한 기능이 완성되었나?
+- [ ] flutter test 모두 통과하나?
+- [ ] flutter run 에러 없이 실행되나?
+- [ ] 새로 만든 코드에 주석이 있나?
+- [ ] Git에 커밋했나?
+
+#### 📌 Rule #19: 주간 리뷰 필수
+매주 일요일에 체크:
+- [ ] 이번 주 계획 달성도는?
+- [ ] 예상보다 어려웠던 부분은?
+- [ ] 다음 주 계획 수정이 필요한가?
+- [ ] 전체 일정에 영향이 있나?
+
+---
+
+### 🎯 품질 관리 Rules
+
+#### 📌 Rule #20: 출시 전 최종 체크
+```bash
+# 반드시 순서대로 진행
+1. flutter test → 모든 테스트 통과
+2. flutter analyze → 코드 분석 경고 없음
+3. flutter build apk → 빌드 성공
+4. 실제 기기에서 전체 기능 테스트
+5. 친구 3명 이상에게 베타 테스트 요청
+```
+
+---
+
+## 🚀 개발 시작하기
+
+### 첫 번째 할 일
+1. 이 Rules 문서를 프린트하거나 모니터 옆에 붙여놓기
+2. DEVELOPMENT_GUIDE.md의 Phase 1부터 차근차근 시작
+3. 매일 Rule #18 체크리스트 확인하기
+
+### 🤗 개발자에게 한 마디
+"완벽하게 만들려고 하지 말고, 일단 동작하게 만들고 조금씩 개선해나가세요! 
+사용자가 실제로 써보고 '어? 이거 도움돼!' 라고 말하는 순간이 가장 중요합니다! 🌟"
+
+---
+
+*이 Rules는 개발 진행하면서 계속 업데이트됩니다. 막히는 부분이 있으면 Rules에 추가하세요!* ✨ 

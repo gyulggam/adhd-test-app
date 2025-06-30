@@ -1,0 +1,185 @@
+{
+  "test_info": {
+    "title": "어? hoxy ADHD인가?",
+    "description": "WHO ASRS-v1.1 기반 18문항 셀프체크",
+    "total_questions": 18,
+    "estimated_time": "5-7분",
+    "scoring": {
+      "min_score": 0,
+      "max_score": 54,
+      "scale": ["전혀 아니다", "거의 아니다", "가끔 그렇다", "자주 그렇다"]
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "일을 끝내는 데 어려움을 겪거나, 일의 세부사항을 마무리하지 못한다",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": true,
+      "threshold": 2
+    },
+    {
+      "id": 2,
+      "text": "체계적인 정리가 필요한 일이나 업무를 할 때 어려움을 겪는다",
+      "category": "attention_deficit", 
+      "part": "A",
+      "is_high_weight": true,
+      "threshold": 2
+    },
+    {
+      "id": 3,
+      "text": "집중력이나 주의력이 오래 지속되어야 하는 업무나 일을 피하거나, 싫어하거나, 하기를 꺼린다",
+      "category": "attention_deficit",
+      "part": "A", 
+      "is_high_weight": true,
+      "threshold": 2
+    },
+    {
+      "id": 4,
+      "text": "업무나 활동에 필요한 물건들을 잃어버린다 (예: 학용품, 연필, 책, 공구, 지갑, 열쇠, 서류, 안경, 휴대폰 등)",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": true, 
+      "threshold": 2
+    },
+    {
+      "id": 5,
+      "text": "외부의 자극에 쉽게 주의가 산만해진다",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": true,
+      "threshold": 2
+    },
+    {
+      "id": 6,
+      "text": "일상생활에서 건망증이 심하다 (예: 약속을 잊거나, 할 일을 잊거나, 청구서 지불을 잊는 등)",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": true,
+      "threshold": 2
+    },
+    {
+      "id": 7,
+      "text": "업무나 다른 활동에서 세부사항에 주의를 기울이지 못해 부주의한 실수를 자주 한다",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 8,
+      "text": "지시사항을 따라가기 어렵고, 업무나 일을 끝내지 못한다",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 9,
+      "text": "다른 사람이 직접 말을 걸어도 듣지 못하는 것 같다",
+      "category": "attention_deficit",
+      "part": "A",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 10,
+      "text": "의자에 앉아서 손발을 만지작거리거나 몸을 꼼지락거린다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 11,
+      "text": "앉아 있어야 하는 상황에서 자리를 뜬다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 12,
+      "text": "안절부절 못하거나 초조하다고 느낀다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 13,
+      "text": "여가활동이나 취미활동을 조용히 하기 어렵다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 14,
+      "text": "끊임없이 활동하거나 마치 '모터가 달린 것'처럼 행동한다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 15,
+      "text": "지나치게 말을 많이 한다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 16,
+      "text": "질문이 끝나기도 전에 성급하게 대답한다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 17,
+      "text": "자신의 순서를 기다리기 어려워한다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    },
+    {
+      "id": 18,
+      "text": "다른 사람의 대화나 게임에 끼어들거나 방해한다",
+      "category": "hyperactivity_impulsivity",
+      "part": "B",
+      "is_high_weight": false,
+      "threshold": 1
+    }
+  ],
+  "result_criteria": {
+    "low_risk": {
+      "description": "ADHD 증상이 경미한 수준",
+      "conditions": {
+        "high_weight_count": 3,
+        "total_score_max": 24
+      },
+      "advice": "일상생활에서 다음과 같은 방법들을 시도해보세요: 체크리스트 작성 습관, 규칙적인 운동, 충분한 수면"
+    },
+    "medium_risk": {
+      "description": "일부 ADHD 증상이 나타남",
+      "conditions": {
+        "high_weight_count": 4,
+        "total_score_range": [25, 39]
+      },
+      "advice": "생활 패턴 개선과 함께 필요시 전문가 상담을 고려해보세요: 업무 환경 정리, 알림 시스템 활용, 스트레스 관리법 학습"
+    },
+    "high_risk": {
+      "description": "ADHD 증상이 상당히 나타남",
+      "conditions": {
+        "high_weight_count_min": 4,
+        "total_score_range": [40, 54]
+      },
+      "advice": "정확한 진단과 적절한 도움을 위해 정신건강의학과 전문의와 상담받으시길 권합니다."
+    }
+  }
+} 
