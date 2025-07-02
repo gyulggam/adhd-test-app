@@ -555,24 +555,6 @@ class TestResultScreen extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 12),
-
-        // 처음으로 버튼
-        SizedBox(
-          width: double.infinity,
-          child: TextButton(
-            onPressed: () =>
-                Navigator.of(context).popUntil((route) => route.isFirst),
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.grey.shade600,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-            ),
-            child: const Text(
-              '처음으로 돌아가기',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
       ],
     );
   }
@@ -599,15 +581,15 @@ class TestResultScreen extends StatelessWidget {
   String _getDefaultDescription() {
     switch (result.riskLevel) {
       case TestRiskLevel.verySafe:
-        return '🌟 매우 안전한 수준의 결과입니다!\n현재 ADHD 관련 증상이 거의 나타나지 않으며, 일상생활에서 집중력과 활동성 모두 안정적인 상태입니다. 이러한 안정성을 유지하면서 건강한 생활 습관을 지속하시면 됩니다.';
+        return '🌟 매우 안정적인 상태입니다!\n\n• 책이나 영상에 집중할 때 딴 생각이 거의 없어요\n• 약속 시간을 잘 지키고 준비물을 챙기는 편이에요\n• 회의나 수업 중에도 가만히 앉아있는 게 어렵지 않아요\n• 말하기 전에 한 번 생각하는 습관이 있어요\n\n현재 상태를 잘 유지하시면 됩니다! 👍';
       case TestRiskLevel.safe:
-        return '✅ 안전한 수준의 결과입니다!\nADHD 관련 증상이 경미한 수준으로, 대부분의 상황에서 적절한 집중력과 활동성을 유지하고 있습니다. 현재의 균형 잡힌 상태를 유지하며, 스트레스 관리에 신경 쓰시면 좋겠습니다.';
+        return '✅ 전반적으로 괜찮은 편입니다!\n\n• 가끔 책 읽다가 딴 생각하긴 하지만 금방 돌아와요\n• 중요한 일은 보통 잘 기억하고 챙기는 편이에요\n• 긴 회의에서 조금 지루할 때가 있지만 참을 만해요\n• 가끔 성급하게 말하긴 해도 심각하지 않아요\n\n현재의 균형을 잘 유지하고 계시네요! 😌';
       case TestRiskLevel.moderate:
-        return '⚖️ 보통 수준의 결과입니다!\nADHD 증상이 보통 수준으로 나타나고 있어, 가끔 집중력이나 활동성 관련 어려움을 경험할 수 있습니다. 일상생활 패턴을 점검하고 필요시 전문가와 상담하는 것을 고려해보세요.';
+        return '⚖️ 보통 수준의 증상들이 나타납니다\n\n• 책이나 업무에 집중하다가 자꾸 다른 생각이 들어요\n• 중요한 약속이나 할 일을 깜빡하는 경우가 종종 있어요\n• 긴 시간 앉아있으면 다리를 떨거나 뭔가 만지작거려요\n• 상대방 말이 끝나기 전에 대답하거나 끼어드는 편이에요\n\n일상 패턴을 점검해보시는 것을 권합니다 🤔';
       case TestRiskLevel.attention:
-        return '⚠️ 주의가 필요한 수준입니다!\nADHD 증상이 상당한 수준으로 나타나고 있어, 일상생활에서 주의 깊은 관찰과 관리가 필요합니다. 집중력 유지나 충동 조절에 어려움이 있다면 전문가의 도움을 받아보시길 권합니다.';
+        return '⚠️ 주의가 필요한 수준의 증상들입니다\n\n• 책이나 강의 중에 같은 문장을 몇 번씩 읽게 돼요\n• 중요한 미팅이나 약속을 자주 깜빡해서 곤란해요\n• 가만히 앉아있기 힘들어서 계속 움직이고 싶어요\n• 생각하자마자 바로 말해서 나중에 후회하는 경우가 많아요\n• 물건을 자주 잃어버리고 항상 뭔가 찾고 있어요\n\n전문가와 상담을 고려해보시길 권합니다 😅';
       case TestRiskLevel.danger:
-        return '🚨 즉시 전문적 도움이 필요합니다!\nADHD 증상이 심각한 수준으로, 일상생활에 상당한 어려움을 겪고 있을 가능성이 높습니다. 집중력 부족, 충동성, 과잉행동이 학업, 직장, 인간관계에 영향을 미칠 수 있어 정신건강의학과 전문의 진료가 필요합니다.';
+        return '🚨 즉시 전문적 도움이 필요한 수준입니다\n\n• 책 한 페이지 읽는 데도 몇십 분이 걸려요 (계속 딴 생각)\n• 중요한 일들을 자꾸 까먹어서 주변에서 걱정해요\n• 회의나 수업에서 가만히 앉아있는 게 정말 고통스러워요\n• 말하고 나서 후회하는 일이 정말 많아요\n• 일상생활이 힘들어서 스트레스를 많이 받고 있어요\n\n전문가와 상담받아보시길 강력히 권해요 🤗';
     }
   }
 
@@ -691,15 +673,15 @@ class TestResultScreen extends StatelessWidget {
   String _getCharacterDescription() {
     switch (result.riskLevel) {
       case TestRiskLevel.verySafe:
-        return 'ADHD 증상이 거의 나타나지 않습니다.\n일상생활에서 집중력과 활동성이 안정적입니다.';
+        return '집중도 잘 되고, 차분한 편입니다!\n일상생활에서 큰 어려움이 없으시네요 😊';
       case TestRiskLevel.safe:
-        return 'ADHD 증상이 경미한 수준입니다.\n대부분의 상황에서 적절한 집중력을 유지합니다.';
+        return '가끔 산만할 때도 있지만 전반적으로 괜찮습니다!\n대부분의 상황에서 잘 해내고 계시네요 👍';
       case TestRiskLevel.moderate:
-        return 'ADHD 증상이 보통 수준입니다.\n가끔 집중력이나 활동성 관련 어려움을 경험할 수 있습니다.';
+        return '보통 수준의 증상들이 나타납니다\n가끔 집중하기 어려운 때가 있습니다 😅';
       case TestRiskLevel.attention:
-        return '⚠️ ADHD 증상이 상당한 수준입니다.\n일상생활에서 주의 깊은 관찰과 관리가 필요합니다.';
+        return '⚠️ 주의가 필요한 수준의 증상들입니다\n일상에서 어려움이 있으실 수 있어요 😔';
       case TestRiskLevel.danger:
-        return '🚨 ADHD 증상이 심각한 수준입니다.\n전문의 진단과 치료가 강력히 권장됩니다.';
+        return '🚨 즉시 전문적 도움이 필요한 수준입니다\n많이 힘드셨겠어요, 도움받으시길 권해요 🤗';
     }
   }
 
