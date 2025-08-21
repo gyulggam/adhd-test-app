@@ -507,53 +507,27 @@ class TestResultScreen extends StatelessWidget {
   Widget _buildActionButtons(BuildContext context) {
     return Column(
       children: [
-        // 메인 액션 버튼들
-        Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  // 다시하기 기능
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF9800),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  '다시 테스트하기',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
+        // 메인 액션 버튼
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              // 다시하기 기능
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFF9800),
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  // 결과 저장 기능 (나중에 구현)
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('결과가 저장되었습니다.')));
-                },
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFFFF9800),
-                  side: const BorderSide(color: Color(0xFFFF9800)),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  '결과 저장하기',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-              ),
+            child: const Text(
+              '다시 테스트하기',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
-          ],
+          ),
         ),
       ],
     );

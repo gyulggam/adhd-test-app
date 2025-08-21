@@ -4,7 +4,8 @@ import 'screens/onboarding/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MobileAds.instance.initialize();
+  // MobileAds 초기화를 백그라운드에서 실행 (앱 시작 속도 향상)
+  MobileAds.instance.initialize();
   runApp(const AdhdCheckApp());
 }
 

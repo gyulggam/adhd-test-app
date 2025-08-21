@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../../core/constants/admob_config.dart';
 
 /// AdMob 배너 광고 위젯
 class AdMobBanner extends StatefulWidget {
@@ -13,9 +14,6 @@ class _AdMobBannerState extends State<AdMobBanner> {
   BannerAd? _bannerAd;
   bool _isAdLoaded = false;
 
-  // 테스트용 배너 광고 ID
-  static const String _adUnitId = 'ca-app-pub-3940256099942544/6300978111';
-
   @override
   void initState() {
     super.initState();
@@ -25,19 +23,25 @@ class _AdMobBannerState extends State<AdMobBanner> {
   void _loadBannerAd() {
     _bannerAd = BannerAd(
       size: AdSize.banner,
-      adUnitId: _adUnitId,
+      adUnitId: AdMobConfig.bannerId, // 설정 파일에서 ID 가져오기
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           setState(() {
             _isAdLoaded = true;
           });
+          if (AdMobConfig.isTestMode) {
+            print('🧪 테스트 광고 로딩 완료: ${AdMobConfig.bannerId}');
+          }
         },
         onAdFailedToLoad: (ad, error) {
-          print('AdMob 배너 광고 로딩 실패: $error');
+          print('❌ AdMob 배너 광고 로딩 실패: $error');
+          if (AdMobConfig.isTestMode) {
+            print('🧪 테스트 모드에서 광고 로딩 실패 - 정상적인 현상일 수 있음');
+          }
           ad.dispose();
         },
-        onAdOpened: (ad) => print('AdMob 배너 광고 열림'),
-        onAdClosed: (ad) => print('AdMob 배너 광고 닫힘'),
+        onAdOpened: (ad) => print('📂 AdMob 배너 광고 열림'),
+        onAdClosed: (ad) => print('❌ AdMob 배너 광고 닫힘'),
       ),
       request: const AdRequest(),
     );
@@ -79,7 +83,7 @@ class _AdMobBannerState extends State<AdMobBanner> {
               ),
               const SizedBox(width: 8),
               Text(
-                '광고 로딩 중...',
+                AdMobConfig.isTestMode ? '테스트 광고 로딩 중...' : '광고 로딩 중...',
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
             ],
@@ -113,9 +117,9 @@ class _AdMobBannerState extends State<AdMobBanner> {
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
-                  'AD',
-                  style: TextStyle(
+                child: Text(
+                  AdMobConfig.isTestMode ? 'TEST AD' : 'AD',
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54,

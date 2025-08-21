@@ -28,9 +28,10 @@
             </intent-filter>
         </activity>
         <!-- AdMob App ID -->
+        <!-- 실제 프로덕션 ID 적용됨 ✅ -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-4307063603855899~2578371306"/>
         
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
